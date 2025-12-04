@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}Admin | Portfólio Alexsander{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1>Painel administrativo</h1>
+        <p class="section-description">
+            Gerencie seus projetos, habilidades e experiências. Todas as ações são feitas via API
+            e atualizam o portfólio público.
+        </p>
+
+        <div class="admin-tabs">
+            <button class="admin-tab-button active" data-target="#admin-projects">Projetos</button>
+            <button class="admin-tab-button" data-target="#admin-skills">Habilidades</button>
+            <button class="admin-tab-button" data-target="#admin-experiences">Experiências</button>
+        </div>
+
+        <!-- ================= PROJETOS ================= -->
+        <div id="admin-projects" class="admin-panel active">
+            <h2>Projetos</h2>
+
+            <form id="project-form" class="admin-form">
+                <input type="hidden" id="project-id" />
+                <div class="form-row">
+                    <label for="project-title">Título *</label>
+                    <input type="text" id="project-title" required />
+                </div>
+                <div class="form-row">
+                    <label for="project-description">Descrição *</label>
+                    <textarea id="project-description" rows="3" required></textarea>
+                </div>
+                <div class="form-row">
+                    <label for="project-technologies">Tecnologias (ex: Python, Flask, JS)</label>
+                    <input type="text" id="project-technologies" />
+                </div>
+                <div class="form-row">
+                    <label for="project-github">Link GitHub</label>
+                    <input type="url" id="project-github" />
+                </div>
+                <div class="form-row">
+                    <label for="project-demo">Link Demo</label>
+                    <input type="url" id="project-demo" />
+                </div>
+                <div class="form-row">
+                    <label for="project-date">Data (ex: 11/2025)</label>
+                    <input type="text" id="project-date" />
+                </div>
+                <div class="form-row">
+                    <label for="project-status">Status (ex: Em andamento, Concluído)</label>
+                    <input type="text" id="project-status" />
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">Salvar projeto</button>
+                    <button type="button" id="project-form-reset" class="btn outline">Limpar</button>
+                </div>
+                <p class="form-hint small-note">
+                    * Campos obrigatórios. Validação básica é feita via JavaScript antes do envio.
+                </p>
+            </form>
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table" id="projects-table">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Tecnologias</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- linhas preenchidas via JS / API -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= HABILIDADES ================= -->
+        <div id="admin-skills" class="admin-panel">
+            <h2>Habilidades</h2>
+
+            <form id="skill-form" class="admin-form">
+                <input type="hidden" id="skill-id" />
+                <div class="form-row">
+                    <label for="skill-name">Nome *</label>
+                    <input type="text" id="skill-name" required />
+                </div>
+                <div class="form-row">
+                    <label for="skill-level">Nível (ex: Iniciante, Intermediário, Avançado)</label>
+                    <input type="text" id="skill-level" />
+                </div>
+                <div class="form-row">
+                    <label for="skill-category">Categoria (ex: Linguagem, Framework)</label>
+                    <input type="text" id="skill-category" />
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">Salvar habilidade</button>
+                    <button type="button" id="skill-form-reset" class="btn outline">Limpar</button>
+                </div>
+            </form>
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table" id="skills-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Nível</th>
+                            <th>Categoria</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Preenchido via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= EXPERIÊNCIAS ================= -->
+        <div id="admin-experiences" class="admin-panel">
+            <h2>Experiências</h2>
+
+            <form id="experience-form" class="admin-form">
+                <input type="hidden" id="experience-id" />
+                <div class="form-row">
+                    <label for="experience-role">Cargo / Papel *</label>
+                    <input type="text" id="experience-role" required />
+                </div>
+                <div class="form-row">
+                    <label for="experience-company">Empresa / Instituição</label>
+                    <input type="text" id="experience-company" />
+                </div>
+                <div class="form-row">
+                    <label for="experience-location">Local</label>
+                    <input type="text" id="experience-location" />
+                </div>
+                <div class="form-row">
+                    <label for="experience-start">Início (ex: 08/2024)</label>
+                    <input type="text" id="experience-start" />
+                </div>
+                <div class="form-row">
+                    <label for="experience-end">Fim (ex: Atual ou 11/2025)</label>
+                    <input type="text" id="experience-end" />
+                </div>
+                <div class="form-row form-row-inline">
+                    <label>
+                        <input type="checkbox" id="experience-current" />
+                        Experiência atual
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label for="experience-description">Descrição</label>
+                    <textarea id="experience-description" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">Salvar experiência</button>
+                    <button type="button" id="experience-form-reset" class="btn outline">Limpar</button>
+                </div>
+            </form>
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table" id="experiences-table">
+                    <thead>
+                        <tr>
+                            <th>Cargo</th>
+                            <th>Empresa</th>
+                            <th>Período</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Preenchido via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}
